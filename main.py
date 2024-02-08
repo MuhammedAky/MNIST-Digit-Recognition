@@ -25,7 +25,7 @@ def print_grid():
 def main():
     pygame.init()
     screen = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
-    pygame.display.set_caption("MNIST Sayı Tanıma")
+    pygame.display.set_caption("MNIST")
 
     clock = pygame.time.Clock()
 
@@ -52,13 +52,11 @@ def main():
                         for col in range(GRID_SIZE):
                             grid[row][col] = 0
                 elif event.key == pygame.K_p:
-                    # "p" tuşuna basıldığında sinir ağı üzerinden tahmin alabilirsiniz
-                    print("Tahmin:", nn.predict(np.array(grid).flatten()))
+                    print("Prediction:", nn.predict(np.array(grid).flatten()))
 
                 elif event.key == pygame.K_s:
-                    # "s" tuşuna basıldığında ekran görüntüsü al ve kaydet
                     pygame.image.save(screen, "drawn_digit.png")
-                    print("Ekran görüntüsü kaydedildi.")
+                    print("img created.")
 
         screen.fill(WHITE)
         draw_grid(screen)
