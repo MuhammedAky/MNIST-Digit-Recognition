@@ -1,5 +1,6 @@
 import pygame
 import sys
+import numpy as np
 
 WINDOW_SIZE = 700
 GRID_SIZE = 28
@@ -10,6 +11,8 @@ WHITE = (255, 255, 255)
 GRID_COLOR = (200, 200, 200)
 
 grid = [[0] * GRID_SIZE for _ in range(GRID_SIZE)]
+
+created_img_num = 0
 
 def draw_grid(screen):
     for row in range(GRID_SIZE):
@@ -23,6 +26,9 @@ def print_grid():
         print(" ".join(map(str, row)))
 
 def main():
+
+    global created_img_num
+
     pygame.init()
     screen = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
     pygame.display.set_caption("MNIST")
@@ -55,8 +61,9 @@ def main():
                     print("Prediction:", nn.predict(np.array(grid).flatten()))
 
                 elif event.key == pygame.K_s:
-                    pygame.image.save(screen, "drawn_digit.png")
+                    pygame.image.save(screen, f"img/img{created_img_num}.png")
                     print("img created.")
+                    created_img_num = created_img_num + 1
 
         screen.fill(WHITE)
         draw_grid(screen)
